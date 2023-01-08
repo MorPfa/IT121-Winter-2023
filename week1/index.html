@@ -1,0 +1,14 @@
+<html>
+<body>
+<p id="paragraph">My name is <first> <last> I have been at SCC for <years> and plan to <goals> after completing my courses.<p>
+<script src="script.js"></script>
+<script>
+  const p = document.getElementById("paragraph");
+  p.innerHTML = p.innerHTML
+    .replace("<first>", firstName)
+    .replace("<last>", lastName)
+    .replace("<years>", yearsOfStudy)
+    .replace("<goals>", goal);
+</script>
+<body> 
+<html>
