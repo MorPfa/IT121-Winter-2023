@@ -1,0 +1,25 @@
+<html>
+<body>
+<p id="paragraph">Apple<p>
+<!-- <script src="PigLatin.js"></script> -->
+<script>
+  function PigTranslation(str) {
+  var firstPos = FirstVowelPos(str);
+  if (firstPos > 0) {
+      return str.slice(firstPos) + str.slice(0, firstPos) + 'ay';
+  }
+  return str + "way";
+}
+function FirstVowelPos(str) {
+  for (var i=0;i < str.length; i++) {
+    if ("aeiou".indexOf(str[i]) !== -1) {
+      return i;
+    }
+  }
+}
+const word = document.getElementById("paragraph");
+PigTranslation(word);
+</script>
+<body> 
+<html>
+
