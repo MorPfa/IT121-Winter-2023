@@ -1,8 +1,9 @@
-<html>
+<!-- Moritz Pfatteicher/ 15/01/2023 / Pig Latin Translation -->
 <body>
 <p id="paragraph">Apple<p>
 <!-- <script src="PigLatin.js"></script> -->
 <script>
+//   This edits the word 
   function PigTranslation(str) {
   var firstPos = FirstVowelPos(str);
   if (firstPos > 0) {
@@ -10,6 +11,7 @@
   }
   return str + "way";
 }
+//   This iterates through the word to check if the word begins with a vowel
 function FirstVowelPos(str) {
   for (var i=0;i < str.length; i++) {
     if ("aeiou".indexOf(str[i]) !== -1) {
