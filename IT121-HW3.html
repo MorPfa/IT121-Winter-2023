@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <div style="text-align: center; margin-top: 10rem; font-size: 2rem">
+      <p id="demo"></p>
+      <script>
+        var grades =
+          "jim|25, sue|32, mary|34, ann|22, ted|28, frank|15, lisa|19, mike|30, ahn|26, vishaya|27";
+        let result = grades.split(", ");
+        let scores = [];
+        let names = [];
+
+        for (let i in result) {
+          let name = result[i].slice(0, result[i].indexOf("|"));
+          names.push(name.charAt(0).toUpperCase() + name.slice(1));
+          scores.push(parseInt(result[i].slice(-2)));
+        }
+
+        // Capitalize first letter of name
+        for (let i in names) {
+          document.write(`<b>Name: </b>${names[i]} `);
+          document.write(`<b>Grade: </b>${scores[i]} <br>`);
+        }
+        // Display the lowest, highest, and average scores
+        let lowest = Math.min(...scores);
+        let highest = Math.max(...scores);
+        let average = scores.reduce((a, b) => a + b, 0) / scores.length;
+
+        document.write(`<br><b>Lowest: </b>${lowest}`);
+        document.write(`<br><b>Highest: </b>${highest}`);
+        document.write(`<br><b>Average: </b>${average}`);
+        document.write(`<br><b>Total: </b>${scores.length}`);
+      </script>
+    </div>
+  </body>
+</html>
