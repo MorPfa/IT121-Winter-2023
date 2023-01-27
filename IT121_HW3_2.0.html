@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <p id="Output"></p>
+    <script>
+      function translatePigLatin(str) {
+        let regex = /^[^aeiou]+/;
+        let consonants = str.match(regex);
+        return consonants !== null
+          ? str.replace(regex, "").concat(consonants).concat("ay")
+          : str.concat("way");
+      }
+      document.write(translatePigLatin(prompt("Enter a word")));
+    </script>
+  </body>
+</html>
