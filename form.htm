@@ -22,9 +22,9 @@
       function validatePassword(str) {
         let value = String(str);
         if (value.length < 8 || value === value.toLowerCase()) {
-          return true; // invalid password
+          return false; // invalid password
         }
-        return false; // valid password
+        return true; // valid password
       }
 
       const validateForm = (myForm) => {
@@ -44,7 +44,7 @@
           $("#message").html("Please enter a last name");
         }
 
-        if (validatePassword(password) === true) {
+        if (validatePassword(password) === false) {
           $("#message").html("Password incorrect");
         }
         if (firstname && lastname && validatePassword(password) === true) {
