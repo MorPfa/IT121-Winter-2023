@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #card_hand {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 0.5em;
+      }
+      .card {
+        height: 100px;
+        width: 70px;
+        border: 1px solid #555;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .♥,
+      .♦ {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button">Deal Hand</button>
+    <hr />
+    <div id="card_hand"></div>
+
+    <script>
+      // Caching the element that will hold the hand,
+      // and the button, and adding a listener to the button
+      const cardHand = document.querySelector("#card_hand");
+      const button = document.querySelector("button");
+      button.addEventListener("click", play);
+
+      // Setting up the suits and values
+      const suits = ["♥", "♠", "♣", "♦"];
+      const values = [
+        "Ace",
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        "Jack",
+        "Queen",
+        "King",
+      ];
+
+      function shuffle(array) {
+        let currentIndex = array.length,
+          randomIndex;
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+          ];
+        }
+        return array;
+      }
+
+      //  Creating a new deck of cards. Iterating over the suits first
+      //  and iterating over the values with the inner loop to return a complete deck of 52 card objects.
+      function createDeck() {
+        const deck = [];
+        for (i = 0; i < suits.length; i++) {
+          for (j = 0; j < values.length; j++) {
+            const card = { value: values[j], suit: suits[i] };
+            deck.push(card);
+          }
+        }
+        return shuffle(deck);
+      }
+
+      // Creating some cards HTML - `mapping` over the `hand` array
+      // and then, using a template string, creating some HTML for
+      // each card. Since `map` returns an array it needs to be joined
+      // into a single string after the iteration is complete
+      function createHTML(hand) {
+        return hand
+          .map((card) => {
+            return `<div class="card ${card.suit}">
+              ${card.value} ${card.suit}
+             </div>`;
+          })
+          .join("");
+      }
+
+      // Creating the deck
+      const deck = createDeck();
+
+      function play() {
+        // If there are enough cards in the deck
+        // take off the first 5 and display them
+        if (deck.length >= 5) {
+          const hand = deck.splice(0, 5);
+          cardHand.innerHTML = createHTML(hand);
+        } else {
+          cardHand.textContent = "No cards remaining";
+        }
+      }
+    </script>
+  </body>
+</html>
