@@ -12,26 +12,40 @@
   <script>
     // Declaring arrays for suits and values
     const suits = ["Hearts", "Spades", "Clubs", "Diamonds"];
-    const values = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"];
+    const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     // Creating the card object
-    function cards(value, suit) {
-      this.value = value;
-      this.suit = suit;
+    class Card {
+      constructor(suit, value) {
+        this.suit = suit;
+        this.value = value;
+      }
     }
     // Creating array of 52 card objects
     var deck = new Array();
-    function getDeck() {
-      for (i = 0; i < 52; i++) {
-        let cardObject = new cards(values[Math.random()], suits[Math.random()]);
-        deck.push(cardObject);
+    function createDeck() {
+      for (i = 0; i < 4; i++) {
+        for (j = 0; j < 13; j++) {
+          let card = new Card(suits[i], values[j]);
+          deck.push(card);
+        }
       }
       return deck;
     }
+
+    function getDeck() {
+      var hand = new Array();
+      for (i = 0; i < 5; i++) {
+        let x = Math.floor(Math.random() * 52);
+        hand.push(deck[x]);
+      }
+      return hand;
+    }
     //  Dealing hand of 5 card objects / outputting it to HTML
     const dealHand = () => {
-      for (i = 0; i < 6; i++) {
-        $("#card_hand").html(getDeck());
-      }
+      let y = createDeck();
+      let z = getDeck();
+      console.log(z);
+      $("#card_hand").html(getDeck());
 
       return false; // prevent page reload
     };
