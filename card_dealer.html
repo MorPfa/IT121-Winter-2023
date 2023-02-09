@@ -12,7 +12,7 @@
   <script>
     // Declaring arrays for suits and values
     const suits = ["Hearts", "Spades", "Clubs", "Diamonds"];
-    const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    const values = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"];
     // Creating the card object
     class Card {
       constructor(suit, value) {
@@ -31,21 +31,26 @@
       }
       return deck;
     }
-
+    var hand = new Array();
     function getDeck() {
-      var hand = new Array();
+      // let callObjToString = objToString();
       for (i = 0; i < 5; i++) {
         let x = Math.floor(Math.random() * 52);
         hand.push(deck[x]);
       }
       return hand;
     }
+
     //  Dealing hand of 5 card objects / outputting it to HTML
     const dealHand = () => {
-      let y = createDeck();
-      let z = getDeck();
-      console.log(z);
-      $("#card_hand").html(getDeck());
+      let callCreateDeck = createDeck();
+      let callGetDeck = getDeck();
+      let str = "";
+      for (i = 0; i < hand.length; i++) {
+        let obj = hand[i];
+        str += `- ${obj["value"]}  of ${obj["suit"]}  <br>  `;
+        $("#card_hand").html(str);
+      }
 
       return false; // prevent page reload
     };
