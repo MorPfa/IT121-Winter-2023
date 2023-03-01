@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather app</title>
+  </head>
+  <body>
+    <h1>Weather forecast</h1>
+    <form onsubmit="getWeather()">
+      <label for="city">Enter City Name:</label>
+      <input type="text" id="city" name="city" />
+      <br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+    <div id="output"></div>
+    <script>
+      function getWeather(query) {
+        var url =
+          "http://api.openweathermap.org/data/2.5/forecast?q=" +
+          query +
+          "&units=imperial&APPID=56866f8407bb1e2d63330f3c046f35af";
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => displayWeather(data));
+      }
+
+      getWeather("Seattle");
+      function displayWeather(weather) {
+        console.log(weather);
+        var resultContainer = document.querySelector("#output");
+        var cityName = document.createElement("h2");
+        resultContainer.append(cityName);
+        var forecastDate = document.createElement("p");
+        var icon = document.createElement("img");
+        var iconUrl =
+          "http://openweathermap.org/img/w/" +
+          weather.list[0].weather[0].icon +
+          ".png";
+        icon.setAttribute("src", iconUrl);
+        resultContainer.append(icon);
+        var temp = document.createElement("p");
+        var humidity = document.createElement("p");
+        var description = document.createElement("p");
+        var unix_timestamp = weather.city.timezone;
+        var convertedDate = new Date(unix_timestamp * 1000);
+        forecastDate.textContent = `Date: ${convertedDate}`;
+        resultContainer.append(forecastDate);
+        cityName.textContent = weather.city.name;
+
+        temp.textContent = `Current Temperature: ${weather.list[0].main.temp} F  
+        Min: ${weather.list[0].main.temp_min} F 
+        Max: ${weather.list[0].main.temp_max} F`;
+        resultContainer.append(temp);
+        humidity.textContent = `Humidity: ${weather.list[0].main.humidity} %`;
+        resultContainer.append(humidity);
+        description.textContent = `Weather conditions: ${weather.list[0].weather[0].description}`;
+        resultContainer.append(description);
+      }
+    </script>
+  </body>
+</html>
