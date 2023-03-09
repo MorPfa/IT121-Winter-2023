@@ -10,7 +10,7 @@
   <body>
     <h1>Weather forecast</h1>
     <form id="cityForm">
-      <label for="city">Enter City Name:</label>
+      <label for="city">Enter City and country Name:</label>
       <input type="text" id="city" name="city" />
       <br /><br />
       <input type="submit" value="Submit" />
@@ -18,6 +18,12 @@
     <div id="output"></div>
     <script>
       function getWeather(query) {
+        query = query.split(" ").join(", ");
+        const validInput = /USA|America/gi;
+        if (!query.match(validInput)) {
+          alert("You can only search for cities in the USA");
+          return;
+        }
         var url =
           "http://api.openweathermap.org/data/2.5/forecast?q=" +
           query +
