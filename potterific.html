@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <title>Potterific</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <style>
@@ -131,16 +133,13 @@
     $(document).ready(function () {
       // add a button for each 'house' value
       var houses = {};
-      for (var i = 0; i < characters.length; i++) {
-        if (characters[i].house !== "") {
-          houses[characters[i].house] = true;
+      for (const element of characters) {
+        if (element.house !== "") {
+          houses[element.house] = true;
         }
       }
 
       for (var house in houses) {
-        // if ($("table tr")) {
-
-        // }
         if (houses.hasOwnProperty(house)) {
           var button = $("<button>").text(house).appendTo("#buttons");
           button.click(function () {
@@ -158,13 +157,13 @@
       }
 
       // add table row for each character
-      for (var i = 0; i < characters.length; i++) {
+      for (const element of characters) {
         var tr = $("<tr>");
-        tr.append($("<td>").text(characters[i].name));
-        tr.append($("<td>").text(characters[i].role));
-        tr.append($("<td>").text(characters[i].house));
-        tr.append($("<td>").text(characters[i].gender));
-        tr.append($("<td>").text(characters[i].alignment));
+        tr.append($("<td>").text(element.name));
+        tr.append($("<td>").text(element.role));
+        tr.append($("<td>").text(element.house));
+        tr.append($("<td>").text(element.gender));
+        tr.append($("<td>").text(element.alignment));
         $("table").append(tr);
       }
       // Reset table

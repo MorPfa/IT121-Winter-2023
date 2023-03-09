@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <head>
+  <title>Robodealer</title>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 <body>
@@ -23,9 +25,12 @@
 
     function createDeck() {
       const deck = [];
-      for (let i = 0; i < suits.length; i++) {
-        for (let j = 0; j < values.length; j++) {
-          const card = { value: values[j], suit: suits[i] };
+      // for (const element of suits) {
+      //   for (let j = 0; j < values.length; j++) {
+      //     const card = { value: values[j], suit: element };
+      for (const suit of suits) {
+        for (const value of values) {
+          const card = new Card(suit, value);
           deck.push(card);
         }
       }
