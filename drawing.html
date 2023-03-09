@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Drawing</title>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+
+    <script>
+      // Get the canvas element
+      var canvas = document.getElementById("myCanvas");
+
+      // Set the canvas size
+      canvas.width = 400;
+      canvas.height = 400;
+
+      // Get the canvas context
+      var ctx = canvas.getContext("2d");
+
+      // Set the stroke and fill styles
+      ctx.strokeStyle = "black";
+      ctx.fillStyle = "red";
+
+      // Define the rectangle and arc positions
+      var rectX = 50;
+      var rectY = 200;
+      var arcX = 300;
+      var arcY = 300;
+
+      // Define the rectangle and arc velocities
+      var rectVX = 2;
+      var rectVY = 1;
+      var arcVX = -1;
+      var arcVY = -2;
+
+      function drawShapes() {
+        // Save the current context
+        ctx.save();
+
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the line
+        ctx.beginPath();
+        ctx.moveTo(50, 50);
+        ctx.lineTo(150, 150);
+        ctx.stroke();
+
+        // Draw the rectangle
+        ctx.beginPath();
+        ctx.rect(rectX, rectY, 100, 100);
+        ctx.stroke();
+        ctx.fill();
+
+        // Draw the arc
+        ctx.beginPath();
+        ctx.arc(arcX, arcY, 50, 0, Math.PI * 2, false);
+        ctx.stroke();
+        ctx.fill();
+
+        // Update the rectangle position
+        rectX += rectVX;
+        rectY += rectVY;
+
+        // Bounce the rectangle off the walls
+        if (rectX + 100 > canvas.width || rectX < 0) {
+          rectVX = -rectVX;
+        }
+        if (rectY + 100 > canvas.height || rectY < 0) {
+          rectVY = -rectVY;
+        }
+
+        // Update the arc position
+        arcX += arcVX;
+        arcY += arcVY;
+
+        // Bounce the arc off the walls
+        if (arcX + 50 > canvas.width || arcX - 50 < 0) {
+          arcVX = -arcVX;
+        }
+        if (arcY + 50 > canvas.height || arcY - 50 < 0) {
+          arcVY = -arcVY;
+        }
+
+        // Restore the saved context
+        ctx.restore();
+      }
+
+      // Start the animation loop
+      setInterval(drawShapes, 20);
+    </script>
+  </body>
+</html>
